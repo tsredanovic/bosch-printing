@@ -1,0 +1,13 @@
+[Unit]
+Description=Printing server
+After=multi-user.target
+
+[Service]
+Type=simple
+User=kraken
+ExecStart=/home/kraken/printing/bosch-printing/venv/bin/python /home/kraken/printing/bosch-printing/printing.py
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
