@@ -22,11 +22,7 @@ async def print_content(websocket, path):
     p.text("Tole je vas kod za narocilo\n")
     p.qr(str(content), size=8, native=True)
     p.cut()
-
-    # Respond
-    response = 'Printing: {}'.format(content)
-    await websocket.send(response)
-    print('SENT: {}'.format(response))
+    print('PRINTING: {}'.format(content))
 
 start_server = websockets.serve(print_content, "127.0.0.1", 5555)
 
