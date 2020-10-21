@@ -13,16 +13,22 @@ p = Serial(devfile='/dev/ttyUSB0',
            dsrdtr=True)
 
 
-async def time(websocket, path):
-    print('kita')
+async def print_content(websocket, path):
+    # Receive
     content = await websocket.recv()
-    print('got', content)
+    print('GOT: {}'.format(content))
+
+    # Print
     p.text("Tole je vas kod za narocilo\n")
     p.qr(str(content), size=8, native=True)
     p.cut()
-    await websocket.send('kita')
 
-start_server = websockets.serve(time, "127.0.0.1", 5555)
+    # Respond
+    response = 'Printing: {}'.format(content)
+    await websocket.send(response)
+    print('SENT: {}'.format(response))
+
+start_server = websockets.serve(print_content, "127.0.0.1", 5555)
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
