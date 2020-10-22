@@ -6,8 +6,6 @@ from escpos.printer import Dummy
 
 """ Dummy """
 my_printer_def = Dummy()
-my_printer_def.profile.profile_data['media']['width']['mm'] = 700
-my_printer_def.profile.profile_data['media']['width']['pixels'] = 700
 
 
 async def print_content(websocket, path):
