@@ -20,9 +20,9 @@ async def print_content(websocket, path):
     printer.set(align='center', bold=False)
     # Print image part
     printer.image(img_source=LOGO_IMAGE_PATH, center=True)
+    printer.ln(count=1)
     # Print datetime part
     printer.text('Datum: {}\n'.format(content['datetime']))
-    printer.ln(count=1)
     # Print number part
     printer.text('Številka naročila: ')
     printer.set(align='center', bold=True)
