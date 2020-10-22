@@ -4,6 +4,8 @@ import json
 import websockets
 from escpos.printer import Dummy
 
+LOGO_IMAGE_PATH = '/Users/tonisredanovic/Projects/bosch-printing/bosch_logo/bosch-logo.png'
+
 """ Dummy """
 printer = Dummy()
 
@@ -16,6 +18,8 @@ async def print_content(websocket, path):
 
     # Align text
     printer.set(align='center', bold=False)
+    # Print image part
+    printer.image(img_source=LOGO_IMAGE_PATH, center=True)
     # Print datetime part
     printer.text('Datum: {}\n'.format(content['datetime']))
     printer.ln(count=1)
