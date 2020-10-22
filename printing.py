@@ -22,11 +22,19 @@ async def print_content(websocket, path):
 
     # Align text
     printer.set(align='center')
+    # Print datetime part
+    printer.text('Datum: {}\n'.format(content['datetime']))
+    printer.ln(count=2)
+    # Print number part
+    printer.text('Številka naročila: {}\n'.format(content['number']))
+    printer.ln(count=2)
     # Print items part
     for item in content['items']:
-        printer.text('{} {}\n'.format(item['ean'], item['quantity']))
+        printer.text('{} ({}) - {}\n'.format(item['name'], item['ean'], item['quantity']))
+    printer.ln(count=4)
     # Print QR part
     printer.text('Tole je vas kod za narocilo\n')
+    printer.ln(count=2)
     printer.qr(content=str(content['number']), size=8, native=False, center=True)
     printer.cut()
 

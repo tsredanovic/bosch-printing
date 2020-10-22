@@ -5,7 +5,7 @@ import websockets
 from escpos.printer import Dummy
 
 """ Dummy """
-my_printer_def = Dummy()
+printer = Dummy()
 
 
 async def print_content(websocket, path):
@@ -15,16 +15,24 @@ async def print_content(websocket, path):
     print('GOT: {}'.format(content))
 
     # Align text
-    my_printer_def.set(align='center')
+    printer.set(align='center')
+    # Print datetime part
+    printer.text('Datum: {}\n'.format(content['datetime']))
+    printer.ln(count=2)
+    # Print number part
+    printer.text('Številka naročila: {}\n'.format(content['number']))
+    printer.ln(count=2)
     # Print items part
     for item in content['items']:
-        my_printer_def.text('{} {}\n'.format(item['ean'], item['quantity']))
+        printer.text('{} ({}) - {}\n'.format(item['name'], item['ean'], item['quantity']))
+    printer.ln(count=4)
     # Print QR part
-    my_printer_def.text('Tole je vas kod za narocilo\n')
-    my_printer_def.qr(content=str(content['number']), size=8, native=False, center=True)
-    my_printer_def.cut()
+    printer.text('Tole je vas kod za narocilo\n')
+    printer.ln(count=2)
+    printer.qr(content=str(content['number']), size=8, native=False, center=True)
+    printer.cut()
     with open('output.prn', 'wb') as file:
-        file.write(my_printer_def.output)
+        file.write(printer.output)
 
 start_server = websockets.serve(print_content, "127.0.0.1", 5555)
 
