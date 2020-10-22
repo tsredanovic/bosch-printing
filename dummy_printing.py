@@ -16,34 +16,68 @@ async def print_content(websocket, path):
     content = json.loads(content)
     print('GOT: {}'.format(content))
 
-    # Align text
+    # IMAGE PART
     printer.set(align='center', bold=False)
-    # Print image part
     printer.image(img_source=LOGO_IMAGE_PATH, center=True)
     printer.ln(count=1)
-    # Print datetime part
+
+    # DATETIME PART
     printer.text('Datum: {}\n'.format(content['datetime']))
-    # Print number part
+
+    # NUMBER PART
     printer.text('Številka naročila: ')
     printer.set(align='center', bold=True)
     printer.text('{}\n'.format(content['number']))
     printer.set(align='center', bold=False)
     printer.ln(count=2)
-    # Print items part
-    printer.set(align='left', bold=False)
-    printer.text('Ime izdelka (EAN)')
-    printer.set(align='right', bold=False)
-    printer.text('Količina\n')
+
+    # ITEMS PART
+    CHARS_IN_ROW = 48
+    CHARS_IN_LEFT_COL = 30
+    strings_to_print = []
+
+    # Header
+    LEFT_COL_HEADER = 'Ime izdelka (EAN)'
+    RIGHT_COL_HEADER = 'Količina'
+    spaces_in_between = CHARS_IN_ROW - len(LEFT_COL_HEADER) - len(RIGHT_COL_HEADER)
+    strings_to_print.append('{}{}{}'.format(LEFT_COL_HEADER, ' '*spaces_in_between, RIGHT_COL_HEADER))
+
+    # Items
     for item in content['items']:
-        printer.set(align='left', bold=False)
-        printer.text('{} ({})'.format(item['name'], item['ean']))
-        printer.set(align='right', bold=False)
-        printer.text('{}\n'.format(item['quantity']))
+        name = item['name']
+        ean = str(item['ean'])
+        quantity = str(item['quantity'])
+        # Divide name into substrings of CHARS_IN_LEFT_COL length
+        name_substrings = [name[0+i:CHARS_IN_LEFT_COL+i] for i in range(0, len(name), CHARS_IN_LEFT_COL)]
+        for i, name_substring in enumerate(name_substrings):
+            if i == 0:
+                # First row
+                spaces_in_between = CHARS_IN_ROW - len(name_substring) - len(quantity)
+                strings_to_print.append('{}{}{}'.format(name_substring, ' ' * spaces_in_between, quantity))
+            else:
+                # Every other row
+                spaces_in_between = CHARS_IN_ROW - len(name_substring)
+                strings_to_print.append('{}{}'.format(name_substring, ' ' * spaces_in_between))
+        # Last row (EAN)
+        ean_substring = '({})'.format(ean)
+        spaces_in_between = CHARS_IN_ROW - len(ean_substring)
+        strings_to_print.append('{}{}'.format(ean_substring, ' ' * spaces_in_between))
+
+    # Actually print strings_to_print with first row bold
+    printer.set(align='left', bold=True)
+    printer.text('{}\n'.format(strings_to_print[0]))
+    printer.set(align='left', bold=False)
+    for string_to_print in strings_to_print[1:]:
+        printer.text('{}\n'.format(string_to_print))
+
     printer.set(align='center', bold=False)
     printer.ln(count=3)
-    # Print QR part
-    printer.text('Tole je vas kod za narocilo\n')
+
+    # QR PART
+    printer.text('Tole je vaš kod za naročilo\n')
     printer.qr(content=str(content['number']), size=8, native=False, center=True)
+
+    # CUT
     printer.cut()
 
     # Print to file

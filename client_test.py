@@ -12,12 +12,12 @@ async def hello():
             "datetime": "22-10-2020 12:69",
             "items": [
                 {
-                    "ean": 1,
-                    "quantity": 3,
-                    "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                    "ean": 142364527364234,
+                    "quantity": 32,
+                    "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
                 },
                 {
-                    "ean": 2,
+                    "ean": 254353523434,
                     "quantity": 1,
                     "name": "Sharaf"
                 }
