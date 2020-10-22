@@ -9,18 +9,17 @@ async def hello():
     async with websockets.connect(uri) as websocket:
         payload = {
             "number": 69,
+            "datetime": "22-10-2020 12:69",
             "items": [
                 {
                     "ean": 1,
-                    "quantity": 3
+                    "quantity": 3,
+                    "name": "Pila"
                 },
                 {
                     "ean": 2,
-                    "quantity": 1
-                },
-                {
-                    "ean": 3,
-                    "quantity": 8
+                    "quantity": 1,
+                    "name": "Sharaf"
                 }
             ]
         }
