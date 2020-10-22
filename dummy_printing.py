@@ -4,7 +4,7 @@ import json
 import websockets
 from escpos.printer import Dummy
 
-LOGO_IMAGE_PATH = '/Users/tonisredanovic/Projects/bosch-printing/bosch_logo/bosch-logo.png'
+LOGO_IMAGE_PATH = '/home/kraken/printing/bosch-printing/bosch_logo/bosch-logo.png'
 
 """ Dummy """
 printer = Dummy()
