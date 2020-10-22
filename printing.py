@@ -36,8 +36,10 @@ async def print_content(websocket, path):
     printer.set(align='center', bold=False)
     printer.ln(count=2)
     # Print items part
+    printer.set(align='left', bold=False)
     for item in content['items']:
         printer.text('{} ({}) - {}\n'.format(item['name'], item['ean'], item['quantity']))
+    printer.set(align='center', bold=False)
     printer.ln(count=3)
     # Print QR part
     printer.text('Tole je vas kod za narocilo\n')
