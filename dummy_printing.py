@@ -75,7 +75,8 @@ async def print_content(websocket, path):
 
     # QR PART
     printer.text('Tole je vaš kod za naročilo\n')
-    printer.qr(content=str(content['number']), size=8, native=False, center=True)
+    qr_string = 'Številka naročila: {}'.format(content['number'])
+    printer.qr(content=qr_string, size=10, native=False, center=True)
 
     # CUT
     printer.cut()
