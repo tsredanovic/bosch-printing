@@ -2,3 +2,4 @@ venv
 .idea
 output.prn
 .DS_Store
+__pycache__
