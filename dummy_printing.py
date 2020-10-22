@@ -30,8 +30,16 @@ async def print_content(websocket, path):
     printer.set(align='center', bold=False)
     printer.ln(count=2)
     # Print items part
+    printer.set(align='left', bold=False)
+    printer.text('Ime izdelka (EAN)')
+    printer.set(align='right', bold=False)
+    printer.text('Količina\n')
     for item in content['items']:
-        printer.text('{} ({}) - {}\n'.format(item['name'], item['ean'], item['quantity']))
+        printer.set(align='left', bold=False)
+        printer.text('{} ({})'.format(item['name'], item['ean']))
+        printer.set(align='right', bold=False)
+        printer.text('{}\n'.format(item['quantity']))
+    printer.set(align='center', bold=False)
     printer.ln(count=3)
     # Print QR part
     printer.text('Tole je vas kod za narocilo\n')
