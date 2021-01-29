@@ -32,22 +32,17 @@ async def print_content(websocket, path):
 
     # IMAGE PART
     print_image_part(printer, LOGO_IMAGE_PATH)
-    print("Image done at:", datetime.now().time())
     # DATETIME PART
     print_datetime_part(printer, content['datetime'])
-    print("Datetime done at:", datetime.now().time())
     # NUMBER PART
     print_number_part(printer, content['number'])
-    print("Number done at:", datetime.now().time())
     # ITEMS PART
     print_items_part(printer, items_text_lines)
-    print("Items done at:", datetime.now().time())
     # QR PART
     print_qr_part(printer, content['number'])
-    print("QR done at", datetime.now().time())
     # CUT
     printer.cut()
-    print("CUT done at:", datetime.now().time())
+    print("CUT at:", datetime.now().time())
 
 start_server = websockets.serve(print_content, "127.0.0.1", 5555)
 
