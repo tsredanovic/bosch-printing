@@ -10,20 +10,20 @@ def print_datetime_part(printer, datetime):
 
 def print_number_part(printer, number):
     printer.text('Številka naročila: ')
-    printer.set(align='center', bold=True)
+    #printer.set(align='center', bold=True)
     printer.text('{}\n'.format(number))
-    printer.set(align='center', bold=False)
+    #printer.set(align='center', bold=False)
     printer.ln(count=2)
 
 
 def print_items_part(printer, items_text_lines):
-    printer.set(align='left', bold=True)
+    printer.set(align='left')
     printer.text('{}\n'.format(items_text_lines[0]))
-    printer.set(align='left', bold=False)
+    printer.set(align='left')
     for string_to_print in items_text_lines[1:]:
         printer.text('{}\n'.format(string_to_print))
 
-    printer.set(align='center', bold=False)
+    printer.set(align='center')
     printer.ln(count=3)
 
 
