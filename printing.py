@@ -39,8 +39,8 @@ async def print_content(websocket, path):
     print_items_part(printer, content['items'])
     print("Items done at: {}", datetime.now().time())
     # QR PART
-    print_qr_part(printer, content['number'])
-    print("QR done at: {}", datetime.now().time())
+    #print_qr_part(printer, content['number'])
+    #print("QR done at: {}", datetime.now().time())
     # CUT
     printer.cut()
     print("CUT done at: {}", datetime.now().time())
