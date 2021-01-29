@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 def print_image_part(printer, image_path):
     printer.set(align='center', bold=False)
     printer.image(img_source=image_path, center=True)
@@ -9,11 +12,18 @@ def print_datetime_part(printer, datetime):
 
 
 def print_number_part(printer, number):
+    print("\tNUMBER PART start at:", datetime.now().time())
     printer.text('Številka naročila: ')
+    print("\t1. text printed at:", datetime.now().time())
     printer.set(align='center', bold=True)
+    print("\tcenter bold set at:", datetime.now().time())
     printer.text('{}\n'.format(number))
+    print("\t2. text printed at:", datetime.now().time())
     printer.set(align='center', bold=False)
+    print("\tcenter not_bold set at:", datetime.now().time())
     printer.ln(count=2)
+    print("\t2 lines printed at:", datetime.now().time())
+    print("\tNUMBER PART end at:", datetime.now().time())
 
 
 def print_items_part(printer, items_text_lines):
