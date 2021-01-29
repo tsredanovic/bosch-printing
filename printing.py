@@ -5,6 +5,7 @@ from datetime import datetime
 import websockets
 from escpos.printer import Serial
 
+from items import generate_items_text_lines
 from printing_parts import *
 
 LOGO_IMAGE_PATH = '/home/kraken/printing/bosch-printing/bosch_logo/bosch-logo.png'
@@ -26,6 +27,9 @@ async def print_content(websocket, path):
     print('GOT: {}'.format(content))
     print("GOT at: ", datetime.now().time())
 
+    # Calculate items text
+    items_text_lines = generate_items_text_lines(content['items'])
+
     # IMAGE PART
     print_image_part(printer, LOGO_IMAGE_PATH)
     print("Image done at:", datetime.now().time())
@@ -36,11 +40,11 @@ async def print_content(websocket, path):
     print_number_part(printer, content['number'])
     print("Number done at:", datetime.now().time())
     # ITEMS PART
-    print_items_part(printer, content['items'])
+    print_items_part(printer, items_text_lines)
     print("Items done at:", datetime.now().time())
     # QR PART
     print_qr_part(printer, content['number'])
-    print("QR done at: {}", datetime.now().time())
+    print("QR done at", datetime.now().time())
     # CUT
     printer.cut()
     print("CUT done at:", datetime.now().time())
