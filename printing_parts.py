@@ -62,4 +62,4 @@ def print_items_part(printer, items):
 def print_qr_part(printer, number):
     printer.text('Tole je vaš kod za naročilo\n')
     qr_string = 'Številka naročila: {}'.format(number)
-    printer.qr(content=qr_string, size=10, native=False, center=True)
+    printer.qr(content=qr_string, size=10, native=True, center=True)
